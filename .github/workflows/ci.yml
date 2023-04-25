@@ -7,5 +7,12 @@ jobs:
   debug:
     runs-on: "ubuntu-latest"
     steps:
-    - run: |-
-        echo '${{ toJSON(github) }}'
+      - run: |-
+          echo '${{ toJSON(github) }}'
+      - run: |-
+          echo "Data" >> data.txt
+      - name: Upload file
+        uses: actions/upload-artifact@v3
+        with:
+          name: data
+          path: data.txt

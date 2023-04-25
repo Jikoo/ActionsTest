@@ -3,17 +3,32 @@ name: "Sample Text"
 on:
   push:
     branches:
-    - '**'
+      - '**'
     tags-ignore:
-    - '**'
+      - '**'
   workflow_dispatch:
 
 jobs:
   debug:
     runs-on: "ubuntu-latest"
     steps:
-    - run: |-
-        echo '${{ toJSON(github) }}'
+      - run: |-
+          echo '${{ toJSON(github) }}'
   ci-run:
     needs: "debug"
     uses: "Jikoo/ActionsTest/.github/workflows/ci.yml@main"
+  import-data:
+    needs: "ci-run"
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: Download CI Data
+        uses: actions/download-artifact@v3
+        with:
+          name: data
+          path: data
+      - name: Store in variable
+        run: |-
+          echo "SAMPLE_DATA=$(cat ./data/data.txt)" >> "$GITHUB_ENV"
+      - name: Print stored data
+        run: |-
+          echo "${{ env.SAMPLE_DATA }}"
