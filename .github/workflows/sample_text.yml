@@ -1,0 +1,11 @@
+name: "Sample Text"
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo '${{ toJSON(github) }}'

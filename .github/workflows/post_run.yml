@@ -1,0 +1,17 @@
+name: Post-Run
+
+on:
+  workflow_run:
+    workflows: [ "Sample Text" ]
+    types: [ "completed" ]
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo '${{ toJSON(github) }}'
+  success:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+    - run: echo 'We did it!'
