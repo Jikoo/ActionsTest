@@ -2,12 +2,11 @@ name: "Sample Text"
 
 on:
   push:
-    tags-ignore:
-    - '**'
   workflow_dispatch:
 
 jobs:
   debug:
+    if: "!startsWith(github.ref, 'refs/tags/v')"
     runs-on: ubuntu-latest
     steps:
     - run: echo '${{ toJSON(github) }}'
