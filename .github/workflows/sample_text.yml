@@ -11,4 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - run: echo '${{ toJSON(github) }}'
-    - uses: Jikoo/ActionsTest/.github/workflows/ci.yml@main
+  ci-run:
+    needs: debug
+    uses: Jikoo/ActionsTest/.github/workflows/ci.yml@main
