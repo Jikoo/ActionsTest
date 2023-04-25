@@ -1,9 +1,9 @@
-name: "Sample Text"
+name: "Sample Release"
 
 on:
   push:
-    tags-ignore:
-    - '**'
+    tags:
+      - '**'
   workflow_dispatch:
 
 jobs:
