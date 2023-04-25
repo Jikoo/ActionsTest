@@ -10,7 +10,8 @@ jobs:
   debug:
     runs-on: "ubuntu-latest"
     steps:
-    - run: "echo '${{ toJSON(github) }}'"
+    - run: |-
+        echo '${{ toJSON(github) }}'
   ci-run:
     needs: "debug"
     uses: "Jikoo/ActionsTest/.github/workflows/ci.yml@main"
