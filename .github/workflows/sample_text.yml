@@ -1,11 +1,6 @@
 name: "Sample Text"
 
 on:
-  push:
-    branches:
-      - '**'
-    tags-ignore:
-      - '**'
   workflow_dispatch:
 
 jobs:
@@ -22,7 +17,7 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
       - name: Download CI Data
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v7
         with:
           name: data
           path: data
