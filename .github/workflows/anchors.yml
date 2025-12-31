@@ -13,15 +13,15 @@ jobs:
   test1:
     runs-on: "ubuntu-latest"
     steps:
-      - &test-anchor
+      - &test-anchor1
         name: Test1
-        run: |
+        run: &test-anchor2 |
           echo "Hello world"
           echo "${{ inputs.test }}"
 
   test2:
     runs-on: "ubuntu-latest"
     steps:
-      - *test-anchor
-      - <<: *test-anchor
-        name: Test2
+      - *test-anchor1
+      - name: Test2
+        run: *test-anchor2
