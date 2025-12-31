@@ -1,0 +1,19 @@
+name: Test creating JSON array
+
+on:
+  workflow_dispatch:
+    inputs:
+      test:
+        description: "A string to split"
+        default: "Sample text"
+        required: false
+        type: "string"
+
+jobs:
+  test:
+    runs-on: "ubuntu-latest"
+    steps:
+      - run: |
+          echo "${{ inputs.test }}"
+          words=$(jq -nc --arg versions "${{ inputs.test }}" '{"words": $versions | split(" ")}')
+          echo "$words"

@@ -1,0 +1,27 @@
+name: Test Anchor Behavior
+
+on:
+  workflow_dispatch:
+    inputs:
+      test:
+        description: "A string!"
+        default: "Sample text"
+        required: false
+        type: "string"
+
+jobs:
+  test1:
+    runs-on: "ubuntu-latest"
+    steps:
+      - &test-anchor
+        name: Test1
+        run: |
+          echo "Hello world"
+          echo "${{ inputs.test }}"
+
+  test2:
+    runs-on: "ubuntu-latest"
+    steps:
+      - *test-anchor
+      - <<: *test-anchor
+        name: Test2
